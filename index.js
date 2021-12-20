@@ -1,3 +1,4 @@
+//Express
 const express = require('express');
 const app = express();
 app.use(express.urlencoded({extended: true}));
@@ -13,13 +14,19 @@ connection.authenticate().
         console.log(error);
 });
 
+//Controllers & Routes
+const categoriesController = require('./controller/categoriesController');
+app.use("/categories", categoriesController);
+const articlesController = require('./controller/articlesController');
+app.use("/articles", articlesController);
+
 //View engine
 app.set('view engine', 'ejs');
 
 //Static files
 app.use(express.static('public'));
 
-//Inicial Page
+//Index route
 app.get("/", (req, res)=>{
     res.render("index");
 });
