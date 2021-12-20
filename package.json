@@ -1,0 +1,26 @@
+{
+  "name": "blog-do-seu-ze",
+  "version": "1.0.0",
+  "description": "A model for blog websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaoFrito/Blog-do-Seu-Ze.git"
+  },
+  "author": "Henrique Amaral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaoFrito/Blog-do-Seu-Ze/issues"
+  },
+  "homepage": "https://github.com/PaoFrito/Blog-do-Seu-Ze#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0"
+  }
+}
