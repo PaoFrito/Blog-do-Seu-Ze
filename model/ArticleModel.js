@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const connection = require('./DAO');
+const CategoryModel = require('./CategoryModel');
 
 const Article = connection.define(
     //table name
@@ -8,11 +9,18 @@ const Article = connection.define(
     title:{
         type: Sequelize.STRING,
         allowNull: false
-    },
-    slug:{
+    },slug:{
         type: Sequelize.STRING,
         allowNull: false
+    },content:{
+        type: Sequelize.TEXT,
+        allowNull: false
     }
-})
+});
+
+CategoryModel.hasMany(Article);
+Article.belongsTo(CategoryModel);
+
+//Article.sync({force: true});
 
 module.exports = Article;

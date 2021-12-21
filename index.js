@@ -4,6 +4,12 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+//View engine
+app.set('view engine', 'ejs');
+
+//Static files
+app.use(express.static('public'));
+
 //Data Base & Models
 const connection = require('./model/DAO');
 connection.authenticate().
@@ -13,19 +19,14 @@ connection.authenticate().
         console.log("[ ERROR ]"); 
         console.log(error);
 });
+const ArticleModel = require('./model/ArticleModel');
+const CategoryModel = require('./model/CategoryModel');
 
 //Controllers & Routes
 const categoriesController = require('./controller/categoriesController');
 app.use("/categories", categoriesController);
 const articlesController = require('./controller/articlesController');
 app.use("/articles", articlesController);
-
-//View engine
-app.set('view engine', 'ejs');
-
-//Static files
-app.use(express.static('public'));
-
 //Index route
 app.get("/", (req, res)=>{
     res.render("index");
@@ -34,11 +35,11 @@ app.get("/", (req, res)=>{
 //Starting local Server
 class Server{
     constructor(port){
-        this.port;
+        this.port = 3000;
     }
 }
 const server = new Server();
-server.port = 3000;
+//server.port = 3000;
 app.listen(server.port, ()=>{
     console.log("[ Porta do Servidor: "+ server.port +" ]");
     console.log("[ Servidor 100% ]");

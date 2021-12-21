@@ -8,11 +8,12 @@ const Category = connection.define(
     name:{
         type: Sequelize.STRING,
         allowNull: false
-    },
-    slug:{
+    },slug:{
         type: Sequelize.STRING,
         allowNull: false
     }
-})
+});
+
+//Category.sync({force: true});
 
 module.exports = Category;
