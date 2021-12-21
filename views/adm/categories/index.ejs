@@ -18,8 +18,15 @@
                     <th><%= category.name %></th>
                     <th><%= category.slug %></th>
                     <th>
-                        <button class="btn btn-warning">Editar</button>
-                        <button class="btn btn-danger">Deletar</button>
+                        <form action="/adm/categories/upDate" method="POST" >
+                            <input type="hidden" name="id" value="<%= category.id %>">
+                            <button class="btn btn-warning">Editar</button>
+                        </form>
+                        <form action="/adm/categories/delete" method="POST">
+                            <input type="hidden" name="id" value="<%= category.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                        
                     </th>
                 </tr>
             <% }) %>

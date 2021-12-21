@@ -29,4 +29,23 @@ router.post("/adm/categories/save", (req, res)=>{
     res.redirect("/adm/categories/new");
 });
 
+router.post("/adm/categories/delete", (req, res)=>{
+    var id = req.body.id;
+    if(id != undefined && !isNaN(id)){
+        CategoryModel.destroy({
+            where: {id:id}
+        });
+    }
+    res.redirect("/adm/categories");
+});
+
+router.post("/adm/categories/upDate", (req, res)=>{
+    var id = req.body.id;
+    /* if(id != undefined && !isNaN(id)){
+        CategoryModel.({
+            where: {id:id}
+        });
+    } */
+    res.redirect("/adm/categories");
+});
 module.exports = router;
