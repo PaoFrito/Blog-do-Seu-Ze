@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 //Static files
 app.use(express.static('public'));
 
-//Data Base & Models
+//Data-Base & Models
 const connection = require('./model/DAO');
 connection.authenticate().
     then(()=>{
@@ -24,9 +24,9 @@ const CategoryModel = require('./model/CategoryModel');
 
 //Controllers & Routes
 const categoriesController = require('./controller/categoriesController');
-app.use("/categories", categoriesController);
+app.use("/", categoriesController);
 const articlesController = require('./controller/articlesController');
-app.use("/articles", articlesController);
+app.use("/", articlesController);
 //Index route
 app.get("/", (req, res)=>{
     res.render("index");
