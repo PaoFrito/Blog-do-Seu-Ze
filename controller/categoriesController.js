@@ -4,7 +4,10 @@ const slugify = require('slugify');
 const CategoryModel = require('../model/CategoryModel');
 
 router.get("/adm/categories", (req, res)=>{
-    res.render("../views/adm/categories/index")
+
+    CategoryModel.findAll().then(categories =>{
+        res.render("../views/adm/categories/index", {category:categories});
+    });
 });
 
 router.get("/adm/categories/new", (req, res)=>{
