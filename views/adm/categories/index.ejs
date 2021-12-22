@@ -20,13 +20,12 @@
                     <th>
                         <form action="/adm/categories/upDate" method="POST" >
                             <input type="hidden" name="id" value="<%= category.id %>">
-                            <button class="btn btn-warning">Editar</button>
+                            <button type="submit" class="btn btn-warning">Editar</button>
                         </form>
                         <form action="/adm/categories/delete" method="POST">
                             <input type="hidden" name="id" value="<%= category.id %>">
-                            <button class="btn btn-danger">Deletar</button>
+                            <button type="submit" class="btn btn-danger">Deletar</button>
                         </form>
-                        
                     </th>
                 </tr>
             <% }) %>
