@@ -4,29 +4,25 @@ const slugify = require('slugify');
 const CategoryModel = require('../model/CategoryModel');
 
 router.get("/adm/categories", (req, res)=>{
-
     CategoryModel.findAll().then(categories =>{
-        res.render("../views/adm/categories/index", {category:categories});
+        res.render("adm/categories/index", {category:categories});
     });
 });
 
 router.get("/adm/categories/new", (req, res)=>{
-    res.render("../views/adm/categories/new");
+    res.render("adm/categories/new");
 });
 
-router.post("/adm/categories/save", (req, res)=>{
+router.post("/adm/categories/create", (req, res)=>{
     var name = req.body.name;
 
     if(name != undefined){
         CategoryModel.create({
             name: name,
             slug: slugify(name)
-        }).then(()=>{
-            res.redirect()
-        })
+        });
     }
-
-    res.redirect("/adm/categories/new");
+    res.redirect("/adm/categories");
 });
 
 router.post("/adm/categories/delete", (req, res)=>{
@@ -39,13 +35,37 @@ router.post("/adm/categories/delete", (req, res)=>{
     res.redirect("/adm/categories");
 });
 
-router.post("/adm/categories/upDate", (req, res)=>{
+router.post("/adm/categories/edit", (req, res)=>{
     var id = req.body.id;
-    /* if(id != undefined && !isNaN(id)){
-        CategoryModel.({
-            where: {id:id}
+
+    if(!isNaN(id)){
+        CategoryModel.findByPk(id).then(category =>{
+            if(category != undefined){
+                res.render("adm/categories/edit", {category:category}); 
+            }
+            else{ 
+                res.redirect("/adm/categories"); 
+            }
+        }).catch(error =>{
+            res.redirect("/adm/categories");
         });
-    } */
-    res.redirect("/adm/categories");
+    }else{
+        res.redirect("/adm/categories");
+    }
 });
+
+router.post("/adm/categories/update", (req, res)=>{
+    var id = req.body.id;
+    var name = req. body.name;
+
+    CategoryModel.update({
+        name: name,
+        slug: slugify(name)
+    },{
+        where: {id: id}
+    }).then(()=>{
+        res.redirect("/adm/categories");
+    })
+});
+
 module.exports = router;
