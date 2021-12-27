@@ -1,27 +1,21 @@
 <%- include('../../partials/header.ejs') %>
-
 <div class="container" style="margin-top: 32px;">
     <div class="card">
         <div class="card-header">
             <h2>Criar novo Artigo</h2>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding-left: 32px; padding-right: 32px;">
             <form method="POST" action="/adm/articles/create">
                 <input class="form-control" type="text" name="title" placeholder="Título">
                 <br>
                 <textarea id="article" class="form-control"  name="content" placeholder="Meu Artigo" rows="20"></textarea>
                 <br>
                 <label><h5>Categoria</h5></label><br>
-                <table>
-                    <tr>
-                        <% category.forEach(category =>{%>
-                            <td style="padding-left: 16px; padding-right: 16px">
-                                <input type="radio" name="categoryId" value="<%= category.id %>">
-                                <label><%= category.name %></label>
-                            </td>
-                        <%})%>
-                    </tr>
-                </table>
+                <select name="categoryId" class="form-control">
+                    <% category.forEach(category =>{%>
+                        <option value="<%= category.id %>"><%= category.name %></option>
+                    <%})%>
+                </select>
                 <button class="btn btn-success" type="submit" style="margin-top: 16px; float: right;">Cadastrar</button>
             </form>
         </div>  
@@ -32,6 +26,8 @@
 <script src="/tinymce/tinymce.min.js"></script>
 <script>
     tinymce.init({
-        selector: "#article"
+        selector: "#article",
+        language: 'pt_BR',
+        plugins: ['advlists autolink link image lists print preview hr seachreplace wordcount fullscreen insertdatetime mediasave table paste emoticons']
     })
 </script>
