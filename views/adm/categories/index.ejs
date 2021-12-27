@@ -14,10 +14,10 @@
         <tbody>
             <% category.forEach(category => { %>
                 <tr>
-                    <th><%= category.id %></th>
-                    <th><%= category.name %></th>
-                    <th><%= category.slug %></th>
-                    <th>
+                    <td><%= category.id %></td>
+                    <td><%= category.name %></td>
+                    <td><%= category.slug %></td>
+                    <td>
                         <form action="/adm/categories/edit" method="POST" >
                             <input type="hidden" name="id" value="<%= category.id %>">
                             <button type="submit" class="btn btn-warning">Editar</button>
@@ -27,7 +27,7 @@
                             <input type="hidden" name="id" value="<%= category.id %>">
                             <button type="submit" class="btn btn-danger">Deletar</button>
                         </form>
-                    </th>
+                    </td>
                 </tr>
             <% }) %>
         </tbody>
