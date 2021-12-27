@@ -3,3 +3,5 @@
 <h2>A model for a blog website</h2>
 
 <p>Feel free to copy anything from here</p>
+
+<p><a href="https://www.tiny.cloud/">TinyMCE</a></p>
