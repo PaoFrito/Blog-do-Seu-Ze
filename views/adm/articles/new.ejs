@@ -11,16 +11,11 @@
                 <textarea id="article" class="form-control"  name="content" placeholder="Meu Artigo" rows="20"></textarea>
                 <br>
                 <label><h5>Categoria</h5></label><br>
-                <table>
-                    <tr>
-                        <% category.forEach(category => { %>
-                            <td style="padding-left: 16px; padding-right: 16px">
-                                <input type="radio" name="categoryId" value="<%= category.id %>">
-                                <label><%= category.name %></label>
-                            </td>
-                        <%});%>
-                    </tr>
-                </table>
+                <select name="categoryId" class="form-control">
+                    <% category.forEach(category=>{%>
+                        <option value="<%= category.id %> "><%= category.name %> </option>
+                    <%}) %> 
+                </select>
                 <button class="btn btn-success" type="submit" style="margin-top: 16px; float: right;">Cadastrar</button>
             </form>
         </div>  

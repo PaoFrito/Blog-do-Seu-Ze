@@ -18,14 +18,14 @@
                 <th>ID Categoria</th>
                 <th>Ações</th>
             </tr>
-        </thead>
+        </thead>    
         <tbody>
             <% article.forEach(article => { %>
                 <tr>
                     <td><%= article.id %></td>
                     <td><%= article.title %></td>
                     <td><%= article.slug %></td>
-                    <td><%= article.categoryId %></td>
+                    <td><%= article.category.name %></td>
                     <td>
                         <form action="/adm/article/edit" method="POST" >
                             <input type="hidden" name="id" value="<%= article.id %>">

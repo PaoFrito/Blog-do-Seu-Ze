@@ -22,6 +22,7 @@ connection.authenticate().
 const ArticleModel = require('./model/ArticleModel');
 const CategoryModel = require('./model/CategoryModel');
 
+
 //Controllers & Routes
 const categoriesController = require('./controller/categoriesController');
 app.use("/", categoriesController);
@@ -29,15 +30,11 @@ const articlesController = require('./controller/articlesController');
 app.use("/", articlesController);
 //Index route
 app.get("/", (req, res)=>{
-    res.render("index");
+    res.render("index")
 });
 
 //Starting local Server
-class Server{
-    constructor(port){
-        this.port = 3000;
-    }
-}
+class Server{constructor(port){this.port = 3000;}}
 const server = new Server();
 //server.port = 3000;
 app.listen(server.port, ()=>{

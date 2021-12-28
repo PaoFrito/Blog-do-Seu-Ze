@@ -21,6 +21,6 @@ const Article = connection.define(
 CategoryModel.hasMany(Article);
 Article.belongsTo(CategoryModel);
 
-//Article.sync({force: true});
+Article.sync({force: true});
 
 module.exports = Article;
