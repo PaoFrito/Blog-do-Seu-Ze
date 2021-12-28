@@ -8,8 +8,12 @@ const connection = new Sequelize(
     'root', 
     //password
     '',{
+    //host
     host: 'localhost',
-    dialect: 'mysql'
+    //DB type
+    dialect: 'mysql',
+    //Timezone
+    timezone: "-03:00"
 });
 
 module.exports = connection;

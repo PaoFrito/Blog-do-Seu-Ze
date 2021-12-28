@@ -1,1 +1,45 @@
- 
+<%- include('../../partials/header.ejs') %>
+<div class="container" style="margin-top: 32px;">
+    <h2>Artigos</h2>
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h4>Add Article</h4>
+        <a class="navbar-brand" href="/adm/article/new"><button class="btn btn-success">Go</button></a>
+        </div>
+    </div>
+    <hr>
+    <table class="table" style="margin-top: 64px;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Slug</th>
+                <th>ID Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% article.forEach(article => { %>
+                <tr>
+                    <td><%= article.id %></td>
+                    <td><%= article.title %></td>
+                    <td><%= article.slug %></td>
+                    <td><%= article.categoryId %></td>
+                    <td>
+                        <form action="/adm/article/edit" method="POST" >
+                            <input type="hidden" name="id" value="<%= article.id %>">
+                            <button type="submit" class="btn btn-warning">Editar</button>
+                        </form>
+                        <br>
+                        <form action="/adm/article/delete" method="POST">
+                            <input type="hidden" name="id" value="<%= article.id %>">
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include('../../partials/footer.ejs') %>

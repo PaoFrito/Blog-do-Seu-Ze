@@ -40,13 +40,9 @@ router.post("/adm/categories/edit", (req, res)=>{
 
     if(!isNaN(id)){
         CategoryModel.findByPk(id).then(category =>{
-            if(category != undefined){
-                res.render("adm/categories/edit", {category:category}); 
-            }
-            else{ 
-                res.redirect("/adm/categories"); 
-            }
+            res.render("adm/categories/edit", {category:category}); 
         }).catch(error =>{
+            console.log(error)
             res.redirect("/adm/categories");
         });
     }else{
@@ -58,14 +54,16 @@ router.post("/adm/categories/update", (req, res)=>{
     var id = req.body.id;
     var name = req. body.name;
 
-    CategoryModel.update({
-        name: name,
-        slug: slugify(name)
-    },{
-        where: {id: id}
-    }).then(()=>{
-        res.redirect("/adm/categories");
-    })
+    if(name != undefined){
+        CategoryModel.update({
+            name: name,
+            slug: slugify(name)
+        },{
+            where: {id: id}
+        }).then(()=>{
+            res.redirect("/adm/categories");
+        })
+    }
 });
 
 module.exports = router;
