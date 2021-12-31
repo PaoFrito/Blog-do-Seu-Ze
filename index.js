@@ -30,7 +30,11 @@ const articlesController = require('./controller/articlesController');
 app.use("/", articlesController);
 //Index route
 app.get("/", (req, res)=>{
-    res.render("index")
+    ArticleModel.findAll({
+        include: [{model: CategoryModel}]
+    }).then(articles=>{
+        res.render("index",{articles:articles});
+    });
 });
 
 //Starting local Server

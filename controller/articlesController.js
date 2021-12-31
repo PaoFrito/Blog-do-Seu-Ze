@@ -9,7 +9,9 @@ router.get("/adm/article", (req, res)=>{
         include: [{model: CategoryModel}]
     }).then(article =>{
         res.render("adm/articles/index", {article: article});
-    });
+    }).catch(error=>{
+        console.log(error);
+    })
 });
 
 router.get("/adm/article/new", (req, res)=>{

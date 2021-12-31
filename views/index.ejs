@@ -1,9 +1,19 @@
 <%- include('partials/header.ejs') %>
- 
+<%- include('partials/navbar.ejs') %>
 <div class="container" style="padding-top: 32px;">
-    <h1 style="padding: 16px;">Index Page</h1>
-    <div style="background-color: #DFE7FF; padding: 16px;">
-        
+    <h1 style="padding: 16px;">Últimos Artigos</h1>
+    <div style="background-color: #ebeffd; padding: 16px; border-radius: 25px;">
+        <% articles.forEach(articles=>{ %>
+            <div class="card" style="margin-top: 32px;">
+                <div class="card-header">
+                    <h3><%= articles.title %></h3>
+                </div>
+                <div class="card-body">
+                    <%= articles.content %>
+                    <ul style=" list-style-type: none;background-color: rgb(239, 255, 255); padding: 16px; margin: 8px; border-radius: 25px;"><li><%= articles.category.name %> </li></ul>
+                </div>
+            </div>
+        <% }) %>
     </div>
 </div>
 <%- include('partials/footer.ejs') %>
