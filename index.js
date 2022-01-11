@@ -41,6 +41,6 @@ app.get("/", (req, res)=>{
 
 //Starting local Server
 app.listen(PORT, ()=>{
-    console.log("[ Porta do Servidor: "+ PORT +" ]");
+    console.log("[ Porta do Servidor: ${PORT} ]");
     console.log("[ Servidor 100% ]");
 });
