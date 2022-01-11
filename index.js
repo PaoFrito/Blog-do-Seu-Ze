@@ -4,6 +4,8 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+const PORT = 3000;
+
 //View engine
 app.set('view engine', 'ejs');
 
@@ -38,7 +40,6 @@ app.get("/", (req, res)=>{
 });
 
 //Starting local Server
-const PORT = 3000;
 app.listen(PORT, ()=>{
     console.log("[ Porta do Servidor: "+ PORT +" ]");
     console.log("[ Servidor 100% ]");
