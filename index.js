@@ -38,10 +38,8 @@ app.get("/", (req, res)=>{
 });
 
 //Starting local Server
-class Server{constructor(port){this.port = 3000;}}
-const server = new Server();
-//server.port = 3000;
-app.listen(server.port, ()=>{
-    console.log("[ Porta do Servidor: "+ server.port +" ]");
+const PORT = 3000;
+app.listen(PORT, ()=>{
+    console.log("[ Porta do Servidor: "+ PORT +" ]");
     console.log("[ Servidor 100% ]");
 });
