@@ -6,12 +6,23 @@ const slugify = require('slugify');
 
 router.get("/adm/article", (req, res)=>{
     ArticleModel.findAll({
-        include: [{model: CategoryModel}]
+        include: [CategoryModel]
     }).then(article =>{
         res.render("adm/articles/index", {article: article});
     }).catch(error=>{
         console.log(error);
     })
+});
+
+router.get("/article/:slug", (req,res)=>{
+    ArticleModel.findOne({ 
+        where: { slug: req.params.slug },
+        include: [{model:CategoryModel}]
+    }).then(article=>{
+        res.render("pages/article", {article: article});
+    }).catch(error=>{
+        console.log(error);
+    });
 });
 
 router.get("/adm/article/new", (req, res)=>{

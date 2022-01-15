@@ -1,19 +1,19 @@
-<%- include('partials/header.ejs') %>
-<%- include('partials/navbar.ejs') %>
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
 <div class="container" style="padding-top: 32px;">
     <h1>Bem vindo ao Blog do Seu Zé</h1><br>
-    <h2 style="padding: 16px;">Últimos Artigos</h2>
+    <h2 style="padding: 16px;">Todas as Categorias</h2>
     <div style="background-color: #ebeffd; padding: 16px; border-radius: 25px;">
-        <% articles.forEach(articles=>{ %>
+        <% category.forEach(category=>{ %>
             <div class="card" style="margin-top: 32px;">
                 <div class="card-header">
-                    <h3><%= articles.title %></h3>
+                    <h3><%= category.name %></h3>
                 </div>
                 <div class="card-body">
-                    <a href="/article/<%= articles.slug %> "><button class="btn btn-success">Ler Mais</button></a>
+                    <a href="/categories/<%= category.slug %> "><button class="btn btn-success">Ver Artigos</button></a>
                 </div>
             </div>
         <% }) %>
     </div>
 </div>
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

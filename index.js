@@ -23,24 +23,26 @@ connection.authenticate().
 });
 const ArticleModel = require('./model/ArticleModel');
 const CategoryModel = require('./model/CategoryModel');
-
+const UserModel = require('./model/UserModel');
 
 //Controllers & Routes
 const categoriesController = require('./controller/categoriesController');
 app.use("/", categoriesController);
 const articlesController = require('./controller/articlesController');
 app.use("/", articlesController);
+const usersController = require('./controller/usersController');
+app.use("/", usersController);
+
+
 //Index route
 app.get("/", (req, res)=>{
-    ArticleModel.findAll({
-        include: [{model: CategoryModel}]
-    }).then(articles=>{
+    ArticleModel.findAll().then(articles=>{
         res.render("index",{articles:articles});
     });
 });
 
 //Starting local Server
 app.listen(PORT, ()=>{
-    console.log("[ Porta do Servidor: ${PORT} ]");
+    console.log(`[ Porta do Servidor: ${PORT} ]`);
     console.log("[ Servidor 100% ]");
 });

@@ -2,11 +2,30 @@ const express = require('express');
 const router = express.Router();
 const slugify = require('slugify');
 const CategoryModel = require('../model/CategoryModel');
+const ArticleModel = require('../model/ArticleModel')
 
 router.get("/adm/categories", (req, res)=>{
     CategoryModel.findAll().then(categories =>{
         res.render("adm/categories/index", {category:categories});
     });
+});
+
+router.get("/categories", (req,res)=>{
+    CategoryModel.findAll().then(categories =>{
+        res.render("pages/categories", {category:categories});
+    });
+});
+
+router.get("/categories/:slug", (req,res)=>{
+    var slug = req.params.slug;
+    CategoryModel.findOne({
+        where: {slug: slug},
+        include: [{model: ArticleModel}]
+    }).then(category=>{
+        res.render("pages/category", {category: category})
+    }).catch(error=>{
+        console.log(error);
+    })
 });
 
 router.get("/adm/categories/new", (req, res)=>{
