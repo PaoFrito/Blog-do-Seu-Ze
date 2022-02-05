@@ -26,6 +26,4 @@ router.post("/adm/users/create", (req, res)=>{
     res.redirect("/adm/users")
 });
 
-
-
 module.exports = router;
