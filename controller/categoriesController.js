@@ -3,8 +3,9 @@ const router = express.Router();
 const slugify = require('slugify');
 const CategoryModel = require('../model/CategoryModel');
 const ArticleModel = require('../model/ArticleModel')
+const admAuth = require('../middleware/admAuth');
 
-router.get("/adm/categories", (req, res)=>{
+router.get("/adm/categories", admAuth, (req, res)=>{
     CategoryModel.findAll().then(categories =>{
         res.render("adm/categories/index", {category:categories});
     });
@@ -28,11 +29,11 @@ router.get("/categories/:slug", (req,res)=>{
     })
 });
 
-router.get("/adm/categories/new", (req, res)=>{
+router.get("/adm/categories/new", admAuth, (req, res)=>{
     res.render("adm/categories/new");
 });
 
-router.post("/adm/categories/create", (req, res)=>{
+router.post("/adm/categories/create", admAuth, (req, res)=>{
     var name = req.body.name;
 
     if(name != undefined){
@@ -44,7 +45,7 @@ router.post("/adm/categories/create", (req, res)=>{
     res.redirect("/adm/categories");
 });
 
-router.post("/adm/categories/delete", (req, res)=>{
+router.post("/adm/categories/delete", admAuth, (req, res)=>{
     var id = req.body.id;
     if(id != undefined && !isNaN(id)){
         CategoryModel.destroy({
@@ -54,7 +55,7 @@ router.post("/adm/categories/delete", (req, res)=>{
     res.redirect("/adm/categories");
 });
 
-router.post("/adm/categories/edit", (req, res)=>{
+router.post("/adm/categories/edit", admAuth, (req, res)=>{
     var id = req.body.id;
 
     if(!isNaN(id)){
@@ -69,9 +70,9 @@ router.post("/adm/categories/edit", (req, res)=>{
     }
 });
 
-router.post("/adm/categories/update", (req, res)=>{
-    var id = req.body.id;
-    var name = req. body.name;
+router.post("/adm/categories/update", admAuth, (req, res)=>{
+    let id = req.body.id;
+    let name = req. body.name;
 
     if(name != undefined){
         CategoryModel.update({

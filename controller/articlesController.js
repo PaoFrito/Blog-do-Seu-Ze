@@ -3,6 +3,7 @@ const router = express.Router();
 const ArticleModel = require('../model/ArticleModel');
 const CategoryModel = require('../model/CategoryModel');
 const slugify = require('slugify');
+const admAuth = require('../middleware/admAuth');
 
 router.get("/article/:slug", (req,res)=>{
     ArticleModel.findOne({ 
@@ -49,7 +50,7 @@ router.get("/article/page/:num", (req, res)=>{
     }
 });
 
-router.get("/adm/article", (req, res)=>{
+router.get("/adm/article", admAuth, (req, res)=>{
     ArticleModel.findAll({
         include: [CategoryModel]
     }).then(article =>{
@@ -59,13 +60,13 @@ router.get("/adm/article", (req, res)=>{
     })
 });
 
-router.get("/adm/article/new", (req, res)=>{
+router.get("/adm/article/new", admAuth, (req, res)=>{
     CategoryModel.findAll().then(category =>{
         res.render("adm/articles/new", {category: category});
     });
 });
 
-router.post("/adm/article/create", (req, res)=>{
+router.post("/adm/article/create", admAuth, (req, res)=>{
     var title = req.body.title;
     var content = req.body.content;
     var categoryId = req.body.categoryId;
@@ -81,7 +82,7 @@ router.post("/adm/article/create", (req, res)=>{
     res.redirect("/adm/article");
 });
 
-router.post("/adm/article/edit", (req, res)=>{
+router.post("/adm/article/edit", admAuth, (req, res)=>{
     var id = req.body.id;
 
     if(!isNaN(id)){
@@ -93,7 +94,7 @@ router.post("/adm/article/edit", (req, res)=>{
     }
 });
 
-router.post("/adm/article/update", (req, res)=>{
+router.post("/adm/article/update", admAuth, (req, res)=>{
     var id = req.body.id;
     var title = req.body.title;
     var content = req.body.content;
@@ -113,7 +114,7 @@ router.post("/adm/article/update", (req, res)=>{
         res.redirect("/adm/article");
 });
 
-router.post("/adm/article/delete", (req, res)=>{
+router.post("/adm/article/delete", admAuth, (req, res)=>{
     var id = req.body.id;
 
     if(id != undefined && !isNaN(id)){
