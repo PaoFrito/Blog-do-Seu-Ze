@@ -1,0 +1,28 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+<% var i = resul.num; %> 
+<div class="container" style="padding-top: 32px;">
+    <div style="background-color: #ebeffd; padding: 16px; border-radius: 25px;">
+        <% resul.articles.rows.forEach(articles=>{%>
+            <div class="card" style="margin-top: 32px;">
+                <div class="card-header">
+                    <h3><%= articles.title %></h3>
+                </div>
+                <div class="card-body">
+                    <a href="/article/<%= articles.slug %> "><button class="btn btn-success">Ler Mais</button></a>
+                </div>
+            </div>
+        <% }) %>
+        <div style="text-align: center;">
+            <% if(resul.pos == 0){%>
+                <a style="margin: auto;" href="/article/page/<%= `${parseInt(i)+1}` %> "><button class="btn btn-success" style="margin-right: 4px;margin-left: 4px;margin-top:16px;width: 10%;">Próximo</button></a>
+            <% }else if(resul.pos == 1){%>
+                <a style="margin: auto;" href="/article/page/<%= `${parseInt(i)-1}` %> "><button class="btn btn-success" style="margin-right: 4px;margin-left: 4px;margin-top:16px;width: 10%;">Anterior</button></a>
+                <a style="margin: auto;" href="/article/page/<%= `${parseInt(i)+1}` %> "><button class="btn btn-success" style="margin-right: 4px;margin-left: 4px;margin-top:16px;width: 10%;">Próximo</button></a>
+            <% }else{ %> 
+                <a style="margin: auto;" href="/article/page/<%= `${parseInt(i)-1}` %> "><button class="btn btn-success" style="margin-right: 4px;margin-left: 4px;margin-top:16px;width: 10%;">Anterior</button></a>
+            <%}%>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %> 

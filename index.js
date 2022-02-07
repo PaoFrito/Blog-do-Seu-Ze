@@ -36,7 +36,10 @@ app.use("/", usersController);
 
 //Index route
 app.get("/", (req, res)=>{
-    ArticleModel.findAll().then(articles=>{
+    ArticleModel.findAll({
+        limit: 5,
+        offset: 0
+    }).then(articles=>{
         res.render("index",{articles:articles});
     });
 });

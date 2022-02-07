@@ -16,11 +16,37 @@ router.get("/article/:slug", (req,res)=>{
 });
 
 router.get("/article/page/:num", (req, res)=>{
-    var num = req.params.num;
+    if(isNaN(req.params.num))
+        res.redirect("/");
+    else{
+        let num = req.params.num;
+        let offset = num*5;
+        let limit = 5;
 
-    ArticleModel.findAndCountAll().then(articles=>{
-        res.json(articles);
-    })
+        ArticleModel.findAndCountAll({
+            limit: limit,
+            offset: offset
+        }).then(articles=>{
+            let pos;
+            if(offset == 0){
+                pos = 0;
+            }else if(offset > 0 && offset+limit < articles.count){
+                pos = 1;
+            }else if(offset > articles.count){
+                res.redirect("/");
+            }else{
+                pos = 2;
+            }
+
+            let resul = {
+                num: num,
+                pos: pos,
+                articles: articles
+            }
+
+            res.render("pages/articlePages", {resul:resul});
+        });
+    }
 });
 
 router.get("/adm/article", (req, res)=>{
