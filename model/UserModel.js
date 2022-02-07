@@ -12,11 +12,11 @@ const User = connection.define(
         type: Sequelize.STRING,
         allowNull: false
     },password:{
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
         allowNull: false
     }
 });
 
-//User.sync({force: true});
+User.sync({force: false});
 
 module.exports = User;

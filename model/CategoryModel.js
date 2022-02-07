@@ -14,6 +14,6 @@ const Category = connection.define(
     }
 });
 
-//Category.sync({force: true});
+Category.sync({force: false});
 
 module.exports = Category;
