@@ -4,19 +4,20 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-//Middlewares
-const admAuth = require('./middleware/admAuth');
-
 //Session
 const session = require('express-session');
 app.use(session({
-    secret: "@87%QPanb$tH9Xcy4a8e",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
+    secret: "banana",
     cookie:{
-        maxAge: 9999999
+        secure: false,
+        maxAge: 1000*60*60*24
     }
-}))
+}));
+
+//Middlewares
+const admAuth = require('./middleware/admAuth');
 
 const PORT = 3000;
 
@@ -60,7 +61,7 @@ app.get("/", (req, res)=>{
 
 //ADM route
 app.get("/adm", admAuth, (req,res)=>{
-    res.render("adm/index");
+    res.render("adm/index",{user: req.session.user});
 });
 
 //Starting local Server

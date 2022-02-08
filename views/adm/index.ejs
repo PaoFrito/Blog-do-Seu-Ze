@@ -1,7 +1,7 @@
 <%- include('../partials/header.ejs') %>
 <%- include('../partials/admnavbar.ejs') %>
 <div class="container" style="padding-top: 32px;">
-    <h1>Bem vindo de volta</h1>
+    <h1>Bem vindo de volta <tag style="color: chocolate;"><%= user.name %></tag></h1>
     <hr>
     <br>
     <table>
@@ -17,6 +17,13 @@
                 <a class="navbar-brand" href="/adm/article">
                     <div class="card">
                         <div class="card-header"><h5 style="color: darkgoldenrod;">Ver Artigos</h5></div>
+                    </div>
+                </a>
+            </td>
+            <td style="padding: 16px;">
+                <a class="navbar-brand" href="/adm/users">
+                    <div class="card">
+                        <div class="card-header"><h5 style="color: darkgoldenrod;">Ver Usuários cadastrados</h5></div>
                     </div>
                 </a>
             </td>

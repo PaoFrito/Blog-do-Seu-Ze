@@ -12,43 +12,38 @@ router.get("/adm/users", admAuth, (req,res)=>{
 
 router.get("/adm/users/login",  (req,res)=>{
     res.render("adm/users/login");
-    
 });
 
 router.post("/adm/users/authenticate", (req, res)=>{
     let email = req.body.email;
     let password = req.body.password;
     
-    UserModel.findOne({where:{email:email}}).then(
-        user=>{
-            if(user != undefined){
-                if(bcrypt.compareSync(password, user.password)){
-                    req.session.user = {
-                        id: user.id,
-                        email: user.email
-                    }
-                }else{
-                    res.redirect("/");
-                }
-            }else{
-                res.redirect("/");
+    UserModel.findOne({
+        where:{email:email}
+    }).then(user=>{
+        if(user != undefined && bcrypt.compareSync(password, user.password)){
+            req.session.user = {
+                id: user.id,
+                email: user.email,
+                name: user.name
             }
+            res.redirect("/adm");
         }
-    ).then(()=>{res.redirect("/adm")})
+    });
 });
 
-router.get("/adm/users/signup", admAuth, (req, res)=>{
+router.get("/adm/users/signup", (req, res)=>{
     res.render("adm/users/new");
 });
 
-router.post("/adm/users/create", admAuth, (req, res)=>{
+router.post("/adm/users/create", (req, res)=>{
     let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
 
     UserModel.findOne({where:{email:email}}).then(user=>{
         if(user != undefined)
-            res.redirect("/adm/users/new");
+            res.redirect("/adm/users/signup");
         else{
             if(name != undefined && password != undefined ){
                 let salt = bcrypt.genSaltSync(10);
@@ -57,7 +52,7 @@ router.post("/adm/users/create", admAuth, (req, res)=>{
                     name: name,
                     email: email,
                     password: hash
-                }).then(()=>res.redirect("/"))
+                }).then(()=>res.redirect("/adm"))
                 .catch((error)=>{
                     console.log("[erro ao cadastrar usuario]");
                     console.log(error);
@@ -93,14 +88,13 @@ router.post("/adm/users/update", admAuth, (req,res)=>{
     let id = req.body.id;
     let name = req. body.name;
     let email = req.body.email;
-    let oldEmail = req.body.oldEmail;
     let password = req.body.password;
 
-    if(!isNaN(id) && id != undefined && name != undefined && email != undefined && password != undefined && oldEmail != undefined)
+    if(name == undefined && email == undefined && password == undefined)
         res.redirect("/adm/users/login");
     else{
-        UserModel.findOne({where:{email:oldEmail}}).then(users=>{
-            if(users != undefined)
+        UserModel.findOne({where:{email:email}}).then(users=>{
+            if(users == undefined)
                 res.redirect("/adm/users/login")
             else{
                 let salt = bcrypt.genSaltSync(10);
@@ -114,6 +108,11 @@ router.post("/adm/users/update", admAuth, (req,res)=>{
             }
         }).catch(error=>{console.log(error)});
     }
+});
+
+router.get("/adm/users/logout", (req, res)=>{
+    req.session.user = undefined;
+    res.redirect("/");
 });
 
 module.exports = router;

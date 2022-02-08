@@ -14,7 +14,6 @@
         <div class="card-body">
             <form method="POST" action="/adm/users/update">
                 <input type="hidden" name="id" value="<%= user.id %>">
-                <input type="hidden" name="oldEmail" value="<%= user.email %>">
                 <input class="form-control" type="text" name="name" id="name" placeholder="Novo nome para <%= user.name %>" value="<%= user.name %>">
                 <input class="form-control" type="email" name="email" placeholder="Novo E-mail" value="<%= user.email %>">
                 <input class="form-control" type="password" name="password" placeholder="Nova Senha">
